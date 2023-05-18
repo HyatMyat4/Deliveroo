@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id       Int    @id @default(autoincrement())
+  Title    String
+  ImageURL String
+}
+
+model FeatureRow {
+  id          Int    @id @default(autoincrement())
+  Title       String @unique
+  Description String
+  Dishes      Json[]
+}
+
+model Dish {
+  id                Int    @id @default(autoincrement())
+  Title             String @unique
+  Rating            Float
+  Genre             String
+  Address           String
+  ImageURL          String
+  Short_description String
+  RestaurantsDishes Json[]
+  Long              Float
+  Lat               Float
+}
+
+model RestaurantDish {
+  id                Int    @id @default(autoincrement())
+  Title             String @unique
+  ImageURL          String
+  Short_description String
+  Price             Float
+}
